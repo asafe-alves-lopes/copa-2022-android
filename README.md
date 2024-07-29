@@ -14,7 +14,7 @@ Para facilitar a dinâmica de integração do nosso App, criamos uma Pseudo-API 
         * ***remote***: Implementação de uma fonte de dados remota usando o [Retrofit](https://square.github.io/retrofit/) como client HTTP.
     * **domain**: Neste módulo são declarados os casos de uso (funcionalidades) da aplicação;
     * **notification-scheduler**: Módulo específico para a criação das Notificações via Work Manager.
-2. :white_large_square: Criar os casos de uso para as seguintes funcionalidades:
+2. :white_check_mark: Criar os casos de uso para as seguintes funcionalidades:
     * Buscar Partidas: `GetMatchesUseCase.kt`;
     * Habilitar Notificação: `EnableNotificationUseCase.kt`;
     * Desabilitar Notificação: `DisableNotificationUseCase.kt`.
