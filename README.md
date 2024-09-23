@@ -18,7 +18,7 @@ Para facilitar a dinâmica de integração do nosso App, criamos uma Pseudo-API 
     * Buscar Partidas: `GetMatchesUseCase.kt`;
     * Habilitar Notificação: `EnableNotificationUseCase.kt`;
     * Desabilitar Notificação: `DisableNotificationUseCase.kt`.
-3. :white_large_square: Criar o `MainViewModel.kt` para orquestrar as interações com a `MainActivity.kt`;
+3. :white_check_mark: Criar o `MainViewModel.kt` para orquestrar as interações com a `MainActivity.kt`;
 4. :white_large_square: Criar a `MainScreen.kt` para criar a UI por meio do Jetpack Compose;
 5. :white_large_square: Integrar o ViewModel e Activity, através da observação de estados;
 6. :white_large_square: Por fim, criar o Work Manager para orquestrar as Notificações Push localmente.
