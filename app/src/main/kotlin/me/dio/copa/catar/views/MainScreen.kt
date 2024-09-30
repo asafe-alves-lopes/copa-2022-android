@@ -1,6 +1,8 @@
 package me.dio.copa.catar.views
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -21,6 +23,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -28,6 +31,7 @@ import coil.compose.AsyncImage
 import me.dio.copa.catar.R
 import me.dio.copa.catar.domain.extensions.getDate
 import me.dio.copa.catar.domain.model.Match
+import me.dio.copa.catar.extensions.replaceMarkToTeam
 import me.dio.copa.catar.ui.theme.Sizes
 
 
@@ -40,7 +44,10 @@ fun MainScreen(
         MainState.Empty -> EmptyScreen(stringResource(id = R.string.msg_no_matches))
         is MainState.Error -> ErrorScreen(error = (state.value as MainState.Error).error)
         MainState.Loading -> LoadingScreen(stringResource(id = R.string.msg_loading_matches))
-        is MainState.Success -> SuccessScreen(matches = (state.value as MainState.Success).matches)
+        is MainState.Success -> SuccessScreen(
+            matches = (state.value as MainState.Success).matches,
+            viewModel::notificationClick
+        )
     }
 }
 
@@ -106,6 +113,7 @@ fun Message(
 @Composable
 fun SuccessScreen(
     matches: List<Match>,
+    notificationClick: (match: Match, title: String, content: String) -> Unit
 ) {
     Column {
         LazyColumn(
@@ -114,7 +122,7 @@ fun SuccessScreen(
             items(matches.size) { index ->
                 if (index == 0)
                     Spacer(modifier = Modifier.height(Sizes.defaultSpacing))
-                MatchCard(match = matches[index])
+                MatchCard(match = matches[index], notificationClick)
             }
         }
     }
@@ -123,6 +131,7 @@ fun SuccessScreen(
 @Composable
 fun MatchCard(
     match: Match,
+    notificationClick: (match: Match, title: String, content: String) -> Unit
 ) {
     Card(
         modifier = Modifier
@@ -142,12 +151,36 @@ fun MatchCard(
                     .padding(Sizes.defaultSpacing),
                 textToShow = "${match.name} - ${match.stadium.name}",
             )
-            AsyncImage(
-                model = match.stadium.image,
-                contentDescription = null,
-                contentScale = ContentScale.Crop,
-                modifier = Modifier.height(160.dp),
-            )
+            Box(
+                contentAlignment = Alignment.TopEnd
+            ) {
+                AsyncImage(
+                    model = match.stadium.image,
+                    contentDescription = null,
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier.height(160.dp),
+                )
+                val drawable = if (match.notificationEnabled) R.drawable.ic_notifications_active
+                else R.drawable.ic_notifications
+                val title = stringResource(id = R.string.notification_title)
+                val content = stringResource(id = R.string.notification_content)
+                Image(
+                    painter = painterResource(id = drawable),
+                    modifier = Modifier
+                        .padding(Sizes.defaultSpacing)
+                        .clickable {
+                            notificationClick(
+                                match,
+                                title,
+                                content.replaceMarkToTeam(
+                                    match.team1.displayName,
+                                    match.team2.displayName
+                                )
+                            )
+                        },
+                    contentDescription = null,
+                )
+            }
             Column(
                 modifier = Modifier
                     .padding(Sizes.defaultSpacing),

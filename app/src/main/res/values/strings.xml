@@ -4,4 +4,6 @@
     <string name="msg_loading_matches">Carregando as partidas</string>
     <string name="msg_no_matches">Não há partidas</string>
     <string name="label_date">Data</string>
+    <string name="notification_title">O jogo vai começar</string>
+    <string name="notification_content">#1 vs #2</string>
 </resources>

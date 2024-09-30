@@ -14,3 +14,6 @@ fun <T> Flow<T>.observe(owner: LifecycleOwner, observe: (T) -> Unit) {
         }
     }
 }
+
+fun String.replaceMarkToTeam(team1: String, team2: String) =
+    this.replace("#1", team1).replace("#2", team2)

@@ -6,6 +6,7 @@ import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import di.NotificationModule
 import me.dio.copa.catar.data.di.DataModule
 import me.dio.copa.catar.local.di.LocalModule
 import me.dio.copa.catar.remote.di.NetworkModule
@@ -19,6 +20,7 @@ import me.dio.copa.catar.remote.di.ServiceModules
         RemoteModule::class,
         NetworkModule::class,
         ServiceModules::class,
+        NotificationModule::class,
     ]
 )
 @InstallIn(SingletonComponent::class)
