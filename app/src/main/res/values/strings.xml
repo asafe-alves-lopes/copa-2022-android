@@ -6,4 +6,6 @@
     <string name="label_date">Data</string>
     <string name="notification_title">O jogo vai começar</string>
     <string name="notification_content">#1 vs #2</string>
+    <string name="msg_notification_not_allowed">Necessário \"Permitir notificações\" no app ou em \"Configurações\" para ativar</string>
+    <string name="btn_allow_notification">Permitir notificações</string>
 </resources>
