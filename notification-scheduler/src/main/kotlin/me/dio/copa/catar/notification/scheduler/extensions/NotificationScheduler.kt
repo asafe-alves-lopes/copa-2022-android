@@ -13,16 +13,17 @@ import java.time.Duration
 import java.time.LocalDateTime
 import javax.inject.Inject
 
-private const val NotificationSchedulerConstantsTitle = "NotificationSchedulerConstantsTitle"
-private const val NotificationSchedulerConstantsContent = "NotificationSchedulerConstantsContent"
+private const val NOTIFICATION_SCHEDULER_CONSTANTS_TITLE = "NotificationSchedulerConstantsTitle"
+private const val NOTIFICATION_SCHEDULER_CONSTANTS_CONTENT = "NotificationSchedulerConstantsContent"
 
 class NotificationSchedulerWorker(private val context: Context, params: WorkerParameters) :
     Worker(context, params) {
     override fun doWork(): Result {
 
-        val notificationTitle = inputData.getString(NotificationSchedulerConstantsTitle) ?: "title"
+        val notificationTitle =
+            inputData.getString(NOTIFICATION_SCHEDULER_CONSTANTS_TITLE) ?: "title"
         val notificationContent =
-            inputData.getString(NotificationSchedulerConstantsContent) ?: "content"
+            inputData.getString(NOTIFICATION_SCHEDULER_CONSTANTS_CONTENT) ?: "content"
 
         context.showNotification(notificationTitle, notificationContent)
 
@@ -35,8 +36,8 @@ class NotificationSchedulerImpl @Inject constructor(private val context: Context
 
     override fun create(match: Match, title: String, content: String) {
         val notificationData = Data.Builder()
-            .putString(NotificationSchedulerConstantsTitle, title)
-            .putString(NotificationSchedulerConstantsContent, content)
+            .putString(NOTIFICATION_SCHEDULER_CONSTANTS_TITLE, title)
+            .putString(NOTIFICATION_SCHEDULER_CONSTANTS_CONTENT, content)
             .build()
 
         val timeUntilTheNotification =
