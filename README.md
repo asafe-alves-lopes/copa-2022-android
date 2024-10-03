@@ -22,6 +22,10 @@ Para facilitar a dinâmica de integração do nosso App, criamos uma Pseudo-API 
 4. :white_check_mark: Criar a `MainScreen.kt` para criar a UI por meio do Jetpack Compose;
 5. :white_check_mark: Integrar o ViewModel e Activity, através da observação de estados;
 6. :white_check_mark: Por fim, criar o Work Manager para orquestrar as Notificações Push localmente.
+ 
+---------------------------------- Extra que adicionei ----------------------------------
+
+7. :white_check_mark: Desligar sino de notificação após notificar
 
 ## Materia/Live de Apoio
 
